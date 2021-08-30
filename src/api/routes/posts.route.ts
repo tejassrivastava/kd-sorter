@@ -6,7 +6,7 @@ const posts = require("../../files/mock_data.json");
 const checkExactMatch = (searchTerm: string, data: any) => {
   console.log("In checkExactMatch", searchTerm);
   const matchedData: any[] = [];
-  data.forEach((post: any[]) => {
+  data.forEach((post: any) => {
     if (
       post.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       post.description.toLowerCase().includes(searchTerm.toLowerCase())
@@ -24,7 +24,7 @@ const normalMatch = (searchTerm: string, data: any) => {
   const searchTermArray = searchTerm.split(" ");
   console.log("searchTermArray", searchTermArray);
 
-  data.forEach((post: any[]) => {
+  data.forEach((post: any) => {
     let flag = false;
     searchTermArray.forEach((sword: string) => {
       if (
@@ -45,7 +45,7 @@ const normalMatch = (searchTerm: string, data: any) => {
 
 const searchResults = (posts: string | any[]) => {
   console.log("In searchResults");
-  return (req, res, next) => {
+  return (req:any, res:any, next:any) => {
     let searchedResult: any = [];
     if (req.body.search && req.body.search !== "") {
       console.log(req.body.search);
@@ -70,14 +70,14 @@ const searchResults = (posts: string | any[]) => {
 const sortedResults = () => {
   console.log("In sortedResults");
 
-  return (req, res, next) => {
+  return (req:any, res:any, next:any) => {
     const data = req.searchResult;
     const sortKey = req.body.sort.key;
     const sortBy = req.body.sort.type;
     console.log(sortKey, sortBy);
     let sortedResult: any[] = [];
 
-    sortedResult = data.sort((a, b) => {
+    sortedResult = data.sort((a:any, b:any) => {
       let x = a[sortKey];
       let y = b[sortKey];
       if (sortBy === "asc") {
@@ -87,7 +87,7 @@ const sortedResults = () => {
       }
     });
 
-    console.log("sortedResult", sortedResult);
+    // console.log("sortedResult", sortedResult);
 
     req.sortedResult = sortedResult;
 
@@ -98,7 +98,7 @@ const sortedResults = () => {
 const paginatedResults = () => {
   console.log("In paginatedResults");
 
-  return (req, res, next) => {
+  return (req:any, res:any, next:any) => {
     const data = req.sortedResult;
 
     const page = parseInt(req.body.page);
@@ -107,7 +107,7 @@ const paginatedResults = () => {
     const startIndex = (page - 1) * limit;
     const endIndex = page * limit;
 
-    const postsResult = {};
+    const postsResult:any = {};
 
     if (startIndex > 0) {
       postsResult.prev = {
@@ -145,7 +145,7 @@ postsRouter.post(
   (req: Request, res: Response) => {
     logger.info("In posts.route.ts");
 
-    res.send(res);
+    res.status(200).send(res);
   }
 );
 

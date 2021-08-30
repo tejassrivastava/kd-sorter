@@ -32,7 +32,7 @@ app.get('/',(req,res,next)=>{
 app.use('/'+process.env.BASE_API_PATH,baseRouter)
 
 // Listen on port 8080
- app.listen(port,() => {
+module.exports = app.listen(port,() => {
    
    logger.info("Listening on port " + port)
     
