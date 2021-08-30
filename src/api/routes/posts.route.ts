@@ -71,6 +71,9 @@ const sortedResults = () => {
   console.log("In sortedResults");
 
   return (req: any, res: any, next: any) => {
+    if(!req.body.sort.key || !req.body.sort.key){
+      res.send({"error":"Send Proper Request Body With Sort Objects"});
+    }
     const data = req.searchResult;
     const sortKey = req.body.sort.key;
     const sortBy = req.body.sort.type;
@@ -100,6 +103,10 @@ const paginatedResults = () => {
 
   return (req: any, res: any, next: any) => {
     const data = req.sortedResult;
+
+    if(!req.body.page || !req.body.limit){
+      res.send({"error":"Send Proper Request Body with page & limit"});
+    }
 
     const page = parseInt(req.body.page);
     const limit = parseInt(req.body.limit);
