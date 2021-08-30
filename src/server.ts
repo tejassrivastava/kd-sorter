@@ -26,7 +26,7 @@ if (process.env.NODE_ENV === 'development') {
 // }
 
 app.get('/',(req,res,next)=>{
-  res.send('<h1>Hello Worlda</h1>')
+  res.send('<h1>Hello World</h1>')
 })
 
 app.use('/'+process.env.BASE_API_PATH,baseRouter)
