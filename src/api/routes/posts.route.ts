@@ -686,14 +686,21 @@ const sortedResults = () => {
     console.log("In sortedResults");
 
     return (req,res,next ) => {
-        const data = req.searchResult;
-        const sortKey = req.sort;
+        const data = req.searchResult;        
+        const sortKey =req.body.sort.key;
+        const sortBy = req.body.sort.type;
+        console.log(sortKey,sortBy);
         let sortedResult:any[] = [];
 
         sortedResult = data.sort((a, b)=>
          {
           let x = a[sortKey]; let y = b[sortKey];
-          return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+            if(sortBy ==="asc"){
+                return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+            }else{
+                return ((x > y) ? -1 : ((x < y) ? 1 : 0));
+            }
+          
          });
         
 
