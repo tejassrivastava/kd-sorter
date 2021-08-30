@@ -45,7 +45,7 @@ const normalMatch = (searchTerm: string, data: any) => {
 
 const searchResults = (posts: string | any[]) => {
   console.log("In searchResults");
-  return (req:any, res:any, next:any) => {
+  return (req: any, res: any, next: any) => {
     let searchedResult: any = [];
     if (req.body.search && req.body.search !== "") {
       console.log(req.body.search);
@@ -70,14 +70,14 @@ const searchResults = (posts: string | any[]) => {
 const sortedResults = () => {
   console.log("In sortedResults");
 
-  return (req:any, res:any, next:any) => {
+  return (req: any, res: any, next: any) => {
     const data = req.searchResult;
     const sortKey = req.body.sort.key;
     const sortBy = req.body.sort.type;
     console.log(sortKey, sortBy);
     let sortedResult: any[] = [];
 
-    sortedResult = data.sort((a:any, b:any) => {
+    sortedResult = data.sort((a: any, b: any) => {
       let x = a[sortKey];
       let y = b[sortKey];
       if (sortBy === "asc") {
@@ -98,7 +98,7 @@ const sortedResults = () => {
 const paginatedResults = () => {
   console.log("In paginatedResults");
 
-  return (req:any, res:any, next:any) => {
+  return (req: any, res: any, next: any) => {
     const data = req.sortedResult;
 
     const page = parseInt(req.body.page);
@@ -107,7 +107,7 @@ const paginatedResults = () => {
     const startIndex = (page - 1) * limit;
     const endIndex = page * limit;
 
-    const postsResult:any = {};
+    const postsResult: any = {};
 
     if (startIndex > 0) {
       postsResult.prev = {
