@@ -24,7 +24,7 @@ To Use the API do the following:
 
 Start the node server
 
-`npm start dev`
+`npm run dev`
 
 Make an API request on 
 
